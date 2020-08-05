@@ -1,7 +1,12 @@
 <script>
     import {crossfade, scale} from 'svelte/transition';
     import {onMount} from "svelte";
+    import {onInterval} from './utils.js';
+    import Gallery from "./Gallery.svelte";
 
+    let logoSlots;
+
+    /*
     let logos = [];
 
     onMount(async () => {
@@ -32,11 +37,11 @@
 
         img.src = `${ASSETS}/${logo.id}.jpg`;
     };
+     */
 </script>
 
 <div class="container">
     <div class="frame">
-
         <h2>&nbsp; myLOGO</h2>
         <div class="outer">
             <div>
@@ -45,35 +50,40 @@
                     Edit Gallery
                 </button>
             </div>
-            <div class="inner">
-                <div class="grid">
-                    {#each logos as logo}
-                        <div class="square">
-                            {#if selected !== logo}
-                                <button
-                                    style="background-color: {logo.color};"
-                                    on:click="{() => load(logo)}"
-                                    in:receive={{key:logo.id}}
-                                    out:send={{key:logo.id}}
-                                >{loading === logo ? '...' : logo.id}</button>
+
+            <Gallery {logoSlots}/>
+
+            <!--
+                        <div class="inner">
+                            <div class="grid">
+                                {#each logos as logo}
+                                    <div class="square">
+                                        {#if selected !== logo}
+                                            <button
+                                                style="background-color: {logo.color};"
+                                                on:click="{() => load(logo)}"
+                                                in:receive={{key:logo.id}}
+                                                out:send={{key:logo.id}}
+                                            >{loading === logo ? '...' : logo.id}</button>
+                                        {/if}
+                                    </div>
+                                {/each}
+                            </div>
+
+                            {#if selected}
+                                {#await selected then d}
+                                    <div class="logo" in:receive={{key:d.id}}
+                                         out:send={{key:d.id}}>
+                                        <img
+                                            alt={d.alt}
+                                            src="{ASSETS}/{d.id}.jpg"
+                                            on:click="{() => selected = null}"
+                                        >
+                                    </div>
+                                {/await}
                             {/if}
                         </div>
-                    {/each}
-                </div>
-
-                {#if selected}
-                    {#await selected then d}
-                        <div class="logo" in:receive={{key:d.id}}
-                             out:send={{key:d.id}}>
-                            <img
-                                alt={d.alt}
-                                src="{ASSETS}/{d.id}.jpg"
-                                on:click="{() => selected = null}"
-                            >
-                        </div>
-                    {/await}
-                {/if}
-            </div>
+                        -->
         </div>
     </div>
 </div>
