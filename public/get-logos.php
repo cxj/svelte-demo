@@ -1,109 +1,40 @@
 <?php
+declare(strict_types=1);
 
-$json = <<<JSON
-[
-   {
-      "color":"#001f3f",
-      "id":"1",
-      "path":"logos/logo-1.svg"
-   
-},
-   {
-      "color":"#0074D9",
-      "id":"2",
-      "path":"logos/logo-2.svg"
-   
-},
-   {
-      "color":"#7FDBFF",
-      "id":"3",
-      "path":"logos/logo-3.svg"
-   
-},
-   {
-      "color":"#39CCCC",
-      "id":"4",
-      "path":"logos/logo-4.svg"
-   
-},
-   {
-      "color":"#3D9970",
-      "id":"5",
-      "path":"logos/logo-5.svg"
-   
-},
-   {
-      "color":"#2ECC40",
-      "id":"6",
-      "path":"logos/logo-6.svg"
-   
-},
-   {
-      "color":"#01FF70",
-      "id":"7",
-      "path":"logos/logo-7.svg"
-   
-},
-   {
-      "color":"#FFDC00",
-      "id":"8",
-      "path":"logos/logo-8.svg"
-   
-},
-   {
-      "color":"#FF851B",
-      "id":"9",
-      "path":"logos/logo-9.svg"
-   
-},
-   {
-      "color":"#FF4136",
-      "id":"10",
-      "path":"logos/logo-10.svg"
-   
-},
-   {
-      "color":"#85144b",
-      "id":"11",
-      "path":"logos/logo-11.svg"
-   
-},
-   {
-      "color":"#B10DC9",
-      "id":"12",
-      "path":"logos/logo-12.svg"
-},
-   {
-      "color":"#892D2D",
-      "id":"13",
-      "path":"logos/logo-13.svg"
-},
-   {
-      "color":"#346474",
-      "id":"14",
-      "path":"logos/logo-14.svg"
-},
-   {
-      "color":"#3A155A",
-      "id":"15",
-      "path":"logos/logo-15.svg"
-},
-   {
-      "color":"#4E6CFE",
-      "id":"16",
-      "path":"logos/logo-16.svg"
+$dir = dir("./logos");
+if (null === $dir || false === $dir) {
+    error_log("dir() failed with bad parameters or other error");
+
+    return '[{"color":"red","id":"99","path":""}]';
 }
-]
-JSON;
 
-$list = json_decode($json);
+class File
+{
+    public string $id;
+    public string $path;
+}
+
+$i = 0;
+$list = [];
+while (false !== ($entry = $dir->read())) {
+    $i++;
+    $path = "logos/" . $entry;
+    if (is_file($path) && is_readable($path)) {
+        $file       = new File();
+        $file->id   = "$i";
+        $file->path = $path;
+        $list[]     = $file;
+    };
+}
+
 // randomize the elements in the array:
 shuffle($list);
 
 // Send only the first 12 to the App.
 $list = array_slice($list, 0, 12);
-// convert back to JSON for output to AJAX/HTTP requests.
+
+// convert to JSON for output to AJAX/HTTP requests.
 $json = json_encode($list);
 error_log(json_last_error_msg());
-error_log(count($list) . " JSON elements decoded");
+error_log(count($list) . " JSON elements encoded");
 echo $json;

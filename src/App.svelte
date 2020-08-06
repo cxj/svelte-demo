@@ -1,5 +1,6 @@
 <script>
-    import Gallery from "./Gallery.svelte";
+    // import Gallery from "./Gallery.svelte";
+    import Gallery from "./Alternative.svelte";
 
     let logoSlots;
 </script>

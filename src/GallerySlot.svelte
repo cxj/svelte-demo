@@ -1,11 +1,14 @@
 <script>
     import {crossfade, scale} from 'svelte/transition';
+    import { cubicOut } from 'svelte/easing';
+
 
     export let logoSlot;
 
     const [send, receive] = crossfade({
-        duration: 500,
-        fallback: scale
+        duration: 5000,
+        easing: cubicOut,
+        // fallback: scale
     });
 
     console.log("GallerySlot::logoSlot.path = " + logoSlot.path);
@@ -14,12 +17,13 @@
 
 </script>
 
-<div class="logo">
-    <button
-        in:receive={{key:logoSlot.id}}
-        out:send={{key:logoSlot.id}}
+<div class="logo"
+     in:receive={{key:logoSlot.path}}
+     out:send={{key:logoSlot.path}}
+>
+    <span class="badge"
         style="background-color: {logoSlot.color};"
-    >{logoSlot.id}</button>
+    >{logoSlot.id}</span>
 
     <img src="http://localhost:7000/{logoSlot.path}" alt="{logoSlot.path}">
 </div>

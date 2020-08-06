@@ -1,0 +1,12 @@
+{
+    "name": "cxj/svelte-logo-app",
+    "description": "Demonstration App",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Chris Johnson",
+            "email": "cxjohnson@gmail.com"
+        }
+    ],
+    "require": {}
+}
