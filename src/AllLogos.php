@@ -47,6 +47,6 @@ class AllLogos
         $payload = new Payload();
         return $payload
             ->setStatus(PayloadStatus::SUCCESS)
-            ->setOutput($json);
+            ->setOutput($list);
     }
 }
