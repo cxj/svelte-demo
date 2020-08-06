@@ -4,7 +4,7 @@
 
 
     const ASSETS = "http://localhost:7000";
-    let url = ASSETS + "/get-logos.php";
+    let url = ASSETS + "/get-logos";
     export let logoSlots = fetch(url).then(r => r.json());
 
     /* ---- */

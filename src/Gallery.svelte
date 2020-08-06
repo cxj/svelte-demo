@@ -6,7 +6,7 @@
     export let logoSlots;
 
     const ASSETS = "http://localhost:7000";
-    let url = ASSETS + "/get-logos.php";
+    let url = ASSETS + "/get-logos";
 
     let interval;
 
@@ -15,7 +15,7 @@
     })
     /*
     onMount(async () => {
-        await fetch(ASSETS + "/get-logos.php")
+        await fetch(ASSETS + "/get-logos")
             .then(r => r.json())
             .then(data => {
                 logoSlots = data;
@@ -32,7 +32,7 @@
     {
         console.log("Tick..." + count++);
 
-        let url = ASSETS + "/get-logos.php";
+        let url = ASSETS + "/get-logos";
         let newSlots;
         try {
             newSlots = (async () => {

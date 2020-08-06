@@ -21,9 +21,7 @@
      in:receive={{key:logoSlot.path}}
      out:send={{key:logoSlot.path}}
 >
-    <span class="badge"
-        style="background-color: {logoSlot.color};"
-    >{logoSlot.id}</span>
+    <span class="badge">{logoSlot.id}</span>
 
     <img src="http://localhost:7000/{logoSlot.path}" alt="{logoSlot.path}">
 </div>

@@ -1,10 +1,13 @@
 <?php
 declare(strict_types=1);
+namespace Cxj;
 
+use Aura\Payload\Payload;
+use Aura\Payload_Interface\PayloadStatus;
 
 class AllLogos
 {
-    public function get12Logos(): string
+    public function __invoke(array $input): Payload
     {
         $dir = dir("./logos");
         if (null === $dir || false === $dir) {
@@ -36,10 +39,14 @@ class AllLogos
         $list = array_slice($list, 0, 12);
 
         // convert to JSON for output to AJAX/HTTP requests.
-        $json = json_encode($list);
+        $json = json_encode($list, JSON_PRETTY_PRINT);
         error_log(json_last_error_msg());
+        error_log("JSON = ++$json++");
         error_log(count($list) . " JSON elements encoded");
 
-        return $json;
+        $payload = new Payload();
+        return $payload
+            ->setStatus(PayloadStatus::SUCCESS)
+            ->setOutput($json);
     }
 }
