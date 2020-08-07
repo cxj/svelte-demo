@@ -1,31 +1,101 @@
 <script>
-    import GallerySlot from "./GallerySlot.svelte";
+    import Cell from "./Cell.svelte";
     import * as Utils from './utils.js';
 
+    export let grid = [];
 
     const ASSETS = "http://localhost:7000";
-    let url = ASSETS + "/get-logos";
-    export let logoSlots = fetch(url).then(r => r.json());
+    const getAllLogos = ASSETS + "/get-logos";
+    const getRandomLogo = ASSETS + "/get-one";
+    const swapThree = ASSETS + "/swap-3";
+
+    fetch(getAllLogos)
+        .then(r => r.json())
+        .then(data => {
+            grid = data;
+        });
 
     /* ---- */
-    setTimeout(new3, 6000);
+    setTimeout(new3, 3000);
 
-    function new3() {
+    let count = 0;
 
+    function new3()
+    {
+        console.log("pre-post grid = " + grid);
+        doPost(grid);
+        console.log("POST result: " + result);
+
+        if (result != null && result.length === 3) {
+            // Pick 3 random cells to replace.
+            let cells = Utils.sampleWithoutReplacement(12, 3);
+            for (let i = 0; i < cells.length; i++) {
+                console.log(
+                    `cells[${i}]: ${cells[i]} - result: ${result[i].id}`
+                );
+                grid[cells[i]] = result[i];
+            }
+        }
+        else if (result != null ) {
+            console.log(" !! result.length = " + result.length);
+        }
+        else {
+            console.log(" !! result is null");
+        }
+
+        count++;
+        /*
+        let randomSlot = Utils.randomInteger(1, 12);
+        console.log("randomSlot = " + randomSlot);
+
+        fetch(getRandomLogo)
+            .then(r => r.json())
+            .then(data => {
+                grid[randomSlot] = data;
+
+                grid = grid;        // May be unnecessary.
+            });
+         */
+        if (count < 2) {
+            setTimeout(new3, 3000, grid);
+        } else {
+            console.log("Timed changes done.");
+        }
+    }
+
+    let result = null;
+
+    async function doPost(input)
+    {
+        const data = {post: input};
+        console.log("POST data: ", data);
+
+        const res = await fetch(swapThree, {
+            method:  'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body:    JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success: ', data);
+                result = data;
+            })
+            .catch((error) => {
+                console.error('Error: ', error);
+                result = [];
+            });
     }
 </script>
 
 <div class="inner">
     <div class="grid">
-        {#await logoSlots}
-            <p class="loading">loading...</p>
-        {:then slots}
-            {#each slots as logoSlot (logoSlot.id) }
-                <div class="square">
-                    <GallerySlot {logoSlot}/>
-                </div>
-            {/each}
-        {/await}
+        {#each grid as cell}
+            <div class="square">
+                <Cell {cell}/>
+            </div>
+        {/each}
     </div>
 </div>
 

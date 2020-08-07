@@ -23,6 +23,20 @@ export function sampleWithoutReplacement(populationSize, sampleSize)
     return samples;
 }
 
+
+/**
+ * Removes elements with value "value" from array.
+ * @param input
+ * @param value
+ * @returns {*}
+ */
+function arrayRemove(input, value)
+{
+    return input.filter(function (ele) {
+        return ele != value;
+    });
+}
+
 export function randomInteger(min, max)
 {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -31,15 +45,17 @@ export function randomInteger(min, max)
 /**
  * Fetch JSON data.
  * @param url
- * @returns {Promise<any>}
+ * @returns {[]}
  */
-export async function getJsonData(url)
+export function getJsonData(url)
 {
-    const response = await fetch(url);
-    const data = await response.json();
-    if (response.ok) {
-        return data;
-    } else {
-        throw new Error(data);
-    }
+    let fuckingPromises = [];
+
+    fetch(url)
+        .then(r => r.json())
+        .then(data => {
+            fuckingPromises = data;
+        });
+
+    return fuckingPromises;
 }

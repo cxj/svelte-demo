@@ -1,9 +1,9 @@
 <script>
     import {onMount} from "svelte";
-    import GallerySlot from "./GallerySlot.svelte";
+    import GallerySlot from "./Cell.svelte";
     import * as Utils from './utils.js';
 
-    export let logoSlots;
+    export let grid;
 
     const ASSETS = "http://localhost:7000";
     let url = ASSETS + "/get-logos";
@@ -11,15 +11,15 @@
     let interval;
 
     onMount(async () => {
-        logoSlots = await Utils.getJsonData(url);
+        grid = await Utils.getJsonData(url);
     })
     /*
     onMount(async () => {
         await fetch(ASSETS + "/get-logos")
             .then(r => r.json())
             .then(data => {
-                logoSlots = data;
-                console.log("logoSlots = " + logoSlots);
+                grid = data;
+                console.log("grid = " + grid);
 
             });
     });
@@ -45,7 +45,7 @@
         let samples = Utils.sampleWithoutReplacement(12, 3);
         console.log("new samples = " + samples);
 
-        logoSlots = newSlots;
+        grid = newSlots;
 
         if (count > 11) {
             clearInterval(interval);

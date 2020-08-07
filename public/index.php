@@ -12,12 +12,12 @@ use Relay\Middleware\ResponseSender;
 use Zend\Diactoros\Response as Response;
 use Zend\Diactoros\ServerRequestFactory as ServerRequestFactory;
 
-
 /**
  * Bootstrapping
  */
 // require_once dirname(__DIR__) . '/vendor/autoload.php';
 require '../vendor/autoload.php';
+
 
 /**
  * @var \Radar\Adr\Adr $adr - the actual ADR instance.
@@ -33,13 +33,15 @@ $adr->middle(new ExceptionHandler(new Response()));
 $adr->middle('Radar\Adr\Handler\RoutingHandler');
 $adr->middle('Radar\Adr\Handler\ActionHandler');
 
-
+$adr->input(Input::class);
 $adr->responder(Responder::class);
 
 /**
  * Routes
  */
 $adr->get('/get-logos', '/get-logos', AllLogos::class);
+$adr->get('/get-one', '/get-one', RandomOne::class);
+$adr->post('swap-3', '/swap-3', SwapThree::class);
 
 /**
  * Run

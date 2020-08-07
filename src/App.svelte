@@ -1,8 +1,7 @@
 <script>
-    // import Gallery from "./Gallery.svelte";
-    import Gallery from "./Alternative.svelte";
+    import Grid from "./Alternative.svelte";
 
-    let logoSlots;
+    let grid = [];
 </script>
 
 <div class="container">
@@ -16,7 +15,7 @@
                 </button>
             </div>
 
-            <Gallery {logoSlots}/>
+            <Grid {grid}/>
         </div>
     </div>
 </div>
