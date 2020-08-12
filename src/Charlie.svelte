@@ -75,68 +75,118 @@
     }
 </script>
 
-<div class="inner">
-
-    <div class=" ">
-        <div class="row">
-            <div class="col-md-4">
-                <div id="g1" class="square">
-                    wtf1
-                    <Cell cell={grid[0]}/>
-                </div>
-            </div>
-            <div id="g2" class="col-md-4">
-                <div class="square">
-                    <Cell cell={grid[1]}/>
-                </div>
-            </div>
-            <div id="g3" class="col-md-4">
-                <div class="square">...
-                    <Cell cell={grid[2]}/>
-                </div>
+<div class="grid">
+    <div class="row">
+        <div class="box">
+            <div class="inner">1
+                <Cell cell={grid[0]}/>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4"></div>
-            <div class="col-md-4"></div>
+        <div class="box">
+            <div class="inner">2
+                <Cell cell={grid[1]}/>
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4"></div>
-            <div class="col-md-4"></div>
+        <div class="box">
+            <div class="inner">3
+                <Cell cell={grid[2]}/>
+            </div>
+        </div>
+        <div class="box">
+            <div class="inner">4
+                <Cell cell={grid[3]}/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="box">
+            <div class="inner">5
+                <Cell cell={grid[4]}/>
+            </div>
+        </div>
+        <div class="box">
+            <div class="inner">6
+                <Cell cell={grid[5]}/>
+            </div>
+        </div>
+        <div class="box">
+            <div class="inner">7
+                <Cell cell={grid[6]}/>
+            </div>
+        </div>
+        <div class="box">
+            <div class="inner">8
+                <Cell cell={grid[7]}/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="box">
+            <div class="inner">9
+                <Cell cell={grid[8]}/>
+            </div>
+        </div>
+        <div class="box">
+            <div class="inner">1
+                <Cell cell={grid[9]}/>
+                0
+            </div>
+        </div>
+        <div class="box">
+            <div class="inner">1
+                <Cell cell={grid[10]}/>
+                1
+            </div>
+        </div>
+        <div class="box">
+            <div class="inner">1
+                <Cell cell={grid[11]}/>
+                2
+            </div>
         </div>
     </div>
 </div>
 
-
 <style>
-    .square {
-        width: 100%;
-        height: 100%;
-        color: white;
-        background-color: cornflowerblue;
-        font-size: 5vmin;
-        border: none;
-        margin: 0;
-        will-change: transform;
-    }
-
-    .inner {
-        background-color: white;
-        position: relative;
-        Xdisplay: flex;
-        Xflex-direction: column;
-        width: 80vmin;
-        height: 50vmin;
-        padding: 3vmin;
-    }
-
     .grid {
-        display: grid;
-        flex: 1;
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: repeat(3, 1fr);
-        grid-gap: 2vmin;
+        margin: 0 auto;
+        width: 80vw;
+        max-width: 60vh;
+        height: 80vw;
+        max-height: 60vh;
+        font-size: 1rem;
+
+        padding: 4rem;
+    }
+
+    .row {
+        display: flex;
+    }
+
+    .box {
+        background: tomato;
+        margin: 5px;
+        color: white;
+        font-weight: bold;
+        flex: 1 0 auto;
+        position: relative;
+    }
+
+    .box:after {
+        content: "";
+        float: left;
+        display: block;
+        padding-top: 100%;
+    }
+
+    .box .inner {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 </style>

@@ -3,7 +3,7 @@
 </script>
 
 <div class="container">
-    <div class="frame">
+    <div class="XXXframe">
         <h2>&nbsp; myLOGO</h2>
         <div class="outer">
             <div>
@@ -13,7 +13,9 @@
                 </button>
             </div>
 
-            <Grid />
+            <div class="inner">
+                <Grid/>
+            </div>
 
         </div>
     </div>
@@ -22,7 +24,7 @@
 <style>
     .container {
         position: absolute;
-        Xdisplay: flex;
+        display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
@@ -43,6 +45,12 @@
         flex-direction: column;
         background-color: #eee;
         border: 10vmin solid #eee;
-        border-top-width: 1vmin;
+        border-top-width: 5vmin;
+        Xborder-bottom-width: 1vmin;
+    }
+
+    .inner {
+        background-color: white;
+
     }
 </style>

@@ -37,10 +37,10 @@
     }
 
     .cell {
-        Xdisplay: flex;
+        display: flex;
         align-items: stretch;
-        Xjustify-content: flex-end;
-        Xflex-direction: column;
+        justify-content: flex-end;
+        flex-direction: column;
         will-change: transform;
     }
 
