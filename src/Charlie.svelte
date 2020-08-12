@@ -153,10 +153,12 @@
         width: 80vw;
         max-width: 60vh;
         height: 80vw;
-        max-height: 60vh;
-        font-size: 1rem;
+        max-height: 45vh;
+        font-size: 2rem;
 
-        padding: 4rem;
+        padding-top: 1vh;
+        padding-left: 4vw;
+        padding-right: 4vw;
     }
 
     .row {
@@ -164,9 +166,11 @@
     }
 
     .box {
-        background: tomato;
-        margin: 5px;
-        color: white;
+        border: 1px solid blue;
+
+        background: white;
+        margin: 1rem;
+        color: tomato;
         font-weight: bold;
         flex: 1 0 auto;
         position: relative;

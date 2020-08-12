@@ -46,7 +46,6 @@
         background-color: #eee;
         border: 10vmin solid #eee;
         border-top-width: 5vmin;
-        Xborder-bottom-width: 1vmin;
     }
 
     .inner {

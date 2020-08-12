@@ -36,7 +36,7 @@
         overflow: hidden;
     }
 
-    .cell {
+    .Xcell {
         display: flex;
         align-items: stretch;
         justify-content: flex-end;
