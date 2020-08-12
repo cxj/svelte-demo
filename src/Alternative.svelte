@@ -22,9 +22,8 @@
 
     function new3()
     {
-        console.log("pre-post grid = " + grid);
         doPost(grid);
-        console.log("POST result: " + result);
+        // console.log("POST result: " + result);
 
         if (result != null && result.length === 3) {
             // Pick 3 random cells to replace.
@@ -35,6 +34,7 @@
                 );
                 grid[cells[i]] = result[i];
             }
+            grid = grid;
         }
         else if (result != null ) {
             console.log(" !! result.length = " + result.length);
@@ -56,7 +56,7 @@
                 grid = grid;        // May be unnecessary.
             });
          */
-        if (count < 2) {
+        if (count < 12) {
             setTimeout(new3, 3000, grid);
         } else {
             console.log("Timed changes done.");
@@ -68,8 +68,6 @@
     async function doPost(input)
     {
         const data = {post: input};
-        console.log("POST data: ", data);
-
         const res = await fetch(swapThree, {
             method:  'POST',
             headers: {

@@ -1,7 +1,5 @@
 <script>
-    import Grid from "./Alternative.svelte";
-
-    let grid = [];
+    import Grid from "./Charlie.svelte";
 </script>
 
 <div class="container">
@@ -15,7 +13,8 @@
                 </button>
             </div>
 
-            <Grid {grid}/>
+            <Grid />
+
         </div>
     </div>
 </div>
@@ -23,7 +22,7 @@
 <style>
     .container {
         position: absolute;
-        display: flex;
+        Xdisplay: flex;
         align-items: center;
         justify-content: center;
         width: 100%;

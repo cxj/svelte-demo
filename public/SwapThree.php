@@ -24,10 +24,14 @@ class SwapThree extends AbstractApp
 
         // error_log("pick3 = " . print_r($pick3, true));
 
+        // FIXME!  Just picks 3 random, instead with without replacement.
         // Now replace them with 3 items:
+        $cell = [];
+        $cell[0] = $this->logoList->fetchRandom();
         $cell[1] = $this->logoList->fetchRandom();
         $cell[2] = $this->logoList->fetchRandom();
-        $cell[3] = $this->logoList->fetchRandom();
+
+        error_log(__CLASS__ . " JSON out: " . json_encode($cell, 0));
 
         return $this->success($cell);
     }

@@ -23,6 +23,25 @@ export function sampleWithoutReplacement(populationSize, sampleSize)
     return samples;
 }
 
+/**
+ * Return a random size sample of input array.
+ * @param array
+ * @param size
+ * @returns {*}
+ */
+export function getRandomSample(array, size)
+{
+    let shuffled = array.slice(0);
+    let i = array.length;
+    let temp, index;
+    while (i--) {
+        index = Math.floor((i + 1) * Math.random());
+        temp = shuffled[index];
+        shuffled[index] = shuffled[i];
+        shuffled[i] = temp;
+    }
+    return shuffled.slice(0, size);
+}
 
 /**
  * Removes elements with value "value" from array.

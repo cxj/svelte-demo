@@ -13,8 +13,6 @@ class AllLogos extends AbstractApp
         // randomize the elements in the array:
         shuffle($list);
 
-        // Send only the first 12 to the App.
-        $list = array_slice($list, 0, 12);
 
         error_log(count($list) . " logo files encoded");
 

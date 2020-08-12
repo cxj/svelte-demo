@@ -1,27 +1,29 @@
 <script>
-    import {fade, crossfade, scale} from 'svelte/transition';
-    import { cubicOut } from 'svelte/easing';
-    export let cell;
+    import {onMount, beforeUpdate, afterUpdate, onDestroy} from "svelte";
+    import {send, receive} from "./crossfade.js";
 
-    const [send, receive] = crossfade({
-        duration: 5000,
-        easing: cubicOut,
-        fallback: scale
+    export let cell = {id:0, path: "", cycle: 0};
+
+    onMount(() => {
+        console.log("Cell mounted");
     });
 
-    console.log(`Cell:: id: ${cell.id}, path: ${cell.path}`);
+    beforeUpdate(() => {
+    //    console.log(`Cell update id: ${cell.id}, path: ${cell.path}`);
+    });
+
+    onDestroy(() => {
+        console.log(" *** Cell destroyed ***");
+    });
 </script>
 
 <div class="cell"
-     in:receive={{key:cell.path}}
-     out:send={{key:cell.path}}
+     id={`cell-slot-${cell.id}`}
+     in:send={{key:cell.id}}
+     out:receive={{key:cell.id}}
 >
     <span class="badge">{cell.id}</span>
-
-    <img in:fade="{{duration: 2000}}"
-         out:fade="{{duration: 2000}}"
-         src="http://localhost:7000/{cell.path}"
-         alt="{cell.path}">
+    <img src="http://localhost:7000/{cell.path}" alt="{cell.path}">
 </div>
 
 <style>
@@ -35,10 +37,10 @@
     }
 
     .cell {
-        display: flex;
+        Xdisplay: flex;
         align-items: stretch;
-        justify-content: flex-end;
-        flex-direction: column;
+        Xjustify-content: flex-end;
+        Xflex-direction: column;
         will-change: transform;
     }
 
