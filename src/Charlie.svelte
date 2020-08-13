@@ -7,14 +7,22 @@
     const getAllLogos = ASSETS + "/mylogos";
 
     let cell;
+    let mode;
+
     let grid = [];
     let allLogos = [];
     let count = 0;
     let timer;
 
     export function handleEdit() {
+        mode = 'edit';
         clearTimeout(timer);
-        alert("Timer stopped");
+        console.log("Timer stopped");
+    }
+    export function handleView() {
+        mode = 'view';
+        timer = setTimeout(new3, 6000);
+        console.log("Timer started");
     }
 
 
@@ -37,17 +45,18 @@
         let newCell;
         count++;
         let slotsToReplace = Utils.getRandomSample(grid, 3);
-        console.log("slotsToReplace: ", slotsToReplace);
+
+        //console.log("slotsToReplace: ", slotsToReplace);
+
         let slotIds = slotsToReplace.map(value => value.id);
-        console.log("About to replace " + slotIds.length + " slots");
-        console.log(" The Slots: ", slotIds);
+
+        //console.log("About to replace " + slotIds.length + " slots");
+        //console.log(" The Slots: ", slotIds);
 
         for (let i = 0; i < 12; i++) {
             if (slotIds.indexOf(grid[i].id) > -1) {
                 newCell = newRandomCell(allLogos, slotsToReplace);
-                console.log(
-                    i + " Replacing ",  grid[i], " with new: ", newCell
-                );
+                // console.log(i + " Swap ",  grid[i], " with new: ", newCell);
 
                 grid[i] = newCell;
             }

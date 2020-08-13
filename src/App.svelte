@@ -2,8 +2,18 @@
     import Grid from "./Charlie.svelte";
 
     let grid;
-    export function tellGrid() {
-        grid.handleEdit();
+    let mode = 'view';
+
+    export function tellGrid()
+    {
+        if (mode === 'view') {
+            grid.handleEdit();
+            mode = 'edit';
+        } else {
+            grid.handleView();
+            mode = 'view';
+        }
+        console.log("Mode: ", mode);
     }
 </script>
 
@@ -12,10 +22,14 @@
         <h2>&nbsp; myLOGO</h2>
         <div class="outer">
             <div>
-                <h3 class="form-control-static pull-left">myGallery</h3>
-                <button class="btn btn-default pull-right"
-                        on:click="{tellGrid}">
-                    Edit Gallery
+                <h3 id="title" class="form-control-static pull-left">
+                    {mode === 'edit' ? 'edit Gallery' : 'myGallery'}
+                </h3>
+                <button id="viewing"
+                        class="mode btn btn-default pull-right"
+                        on:click="{tellGrid}"
+                >
+                    {mode === 'edit' ? 'View' : 'Edit'} Gallery
                 </button>
             </div>
 

@@ -25,7 +25,8 @@
          in:fade="{{duration: 3000, easing: quintOut}}"
          out:fade="{{duration: 3000, easing: quintOut}}"
     >
-        <span class="badge">{cell.id}</span>
+        <!-- span class="badge">{cell.id}</span -->
+
         <img src="http://localhost:7000/{cell.path}" alt="{cell.path}">
     </div>
 
