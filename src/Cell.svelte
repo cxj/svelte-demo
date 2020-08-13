@@ -4,7 +4,7 @@
     import {quintOut} from 'svelte/easing';
     import {crossfade, fade, scale} from 'svelte/transition';
 
-    export let cell = {id: 0, path: "", cycle: 0};
+    export let cell = {id: 0, path: "", cycle: 0, mode: "view"};
 
     onMount(() => {
         console.log("Cell mounted");
@@ -26,14 +26,32 @@
          out:fade="{{duration: 3000, easing: quintOut}}"
     >
         <!-- span class="badge">{cell.id}</span -->
+        <span class="badge {cell.mode !== 'edit' ? 'hidden' : ''}">X</span>
 
-        <img src="http://localhost:7000/{cell.path}" alt="{cell.path}">
+        {#if cell.mode === 'add'}
+            <button type="button" class="add" on:click>+</button>
+        {:else}
+            <img src="http://localhost:7000/{cell.path}" alt="{cell.path}">
+        {/if}
     </div>
 
 </Identity>
 
 <style>
-    .cell, img {
+    button.add {
+        color: white;
+        font-weight: bold;
+        font-size: 3vh;
+        background-color: #99ce4e;
+        border-radius: 20px;
+        object-fit: contain;
+    }
+
+    span.badge {
+        background-color: red;
+    }
+
+    .cell, img, button {
         position: absolute;
         top: 0;
         left: 0;

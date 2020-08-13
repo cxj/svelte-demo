@@ -18,11 +18,19 @@
         mode = 'edit';
         clearTimeout(timer);
         console.log("Timer stopped");
+        // Enable editing on grid members.
+        grid = grid.map(obj => ({ ...obj, mode: 'edit'}));
+        // 12th (last) member of grid becomes an "Add New" button.
+        grid[11].mode = "add";
+
+        console.log("last grid cell: ", grid[11]);  // debug
     }
     export function handleView() {
         mode = 'view';
         timer = setTimeout(new3, 6000);
         console.log("Timer started");
+        // Disable editing on grid members.
+        grid = grid.map(obj => ({ ...obj, mode: 'view'}));
     }
 
 
@@ -31,11 +39,17 @@
             .then(r => r.json())
             .then(data => {
                 allLogos = data;
-                // Arbitrarily pick the first 12 to start.
+                // Init all to non-editable.
+                allLogos = allLogos.map(obj => ({ ...obj, mode: 'view'}));
+
+                // Select first 12 (grid size) in array as initial grid.
                 grid = allLogos.slice(0, 12);
+
                 console.log("allLogos: ", allLogos);
                 console.log("grid: ", grid);
                 // debugger;
+
+                // Start "rotation".
                 timer = setTimeout(new3, 6000);
             });
     });
@@ -61,14 +75,6 @@
                 grid[i] = newCell;
             }
         }
-
-        /*
-        let newId = Utils.randomInteger(0, allLogos.length - 1);
-        let newSlot = Utils.randomInteger(0, 11);
-        grid[newSlot] = {...allLogos[newId]};
-
-        grid = JSON.parse(JSON.stringify(grid));
-         */
 
         if (count < 12) {
             clearTimeout(timer);
@@ -99,44 +105,44 @@
 <div class="grid">
     <div class="row">
         <div class="box">
-            <div class="inner"><Cell cell={grid[0]}/></div>
+            <div class="box-content"><Cell cell={grid[0]}/></div>
         </div>
         <div class="box">
-            <div class="inner"><Cell cell={grid[1]}/></div>
+            <div class="box-content"><Cell cell={grid[1]}/></div>
         </div>
         <div class="box">
-            <div class="inner"><Cell cell={grid[2]}/></div>
+            <div class="box-content"><Cell cell={grid[2]}/></div>
         </div>
         <div class="box">
-            <div class="inner"><Cell cell={grid[3]}/></div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="box">
-            <div class="inner"><Cell cell={grid[4]}/></div>
-        </div>
-        <div class="box">
-            <div class="inner"><Cell cell={grid[5]}/></div>
-        </div>
-        <div class="box">
-            <div class="inner"><Cell cell={grid[6]}/></div>
-        </div>
-        <div class="box">
-            <div class="inner"><Cell cell={grid[7]}/></div>
+            <div class="box-content"><Cell cell={grid[3]}/></div>
         </div>
     </div>
     <div class="row">
         <div class="box">
-            <div class="inner"><Cell cell={grid[8]}/></div>
+            <div class="box-content"><Cell cell={grid[4]}/></div>
         </div>
         <div class="box">
-            <div class="inner"><Cell cell={grid[9]}/></div>
+            <div class="box-content"><Cell cell={grid[5]}/></div>
         </div>
         <div class="box">
-            <div class="inner"><Cell cell={grid[10]}/></div>
+            <div class="box-content"><Cell cell={grid[6]}/></div>
         </div>
         <div class="box">
-            <div class="inner"><Cell cell={grid[11]}/></div>
+            <div class="box-content"><Cell cell={grid[7]}/></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="box">
+            <div class="box-content"><Cell cell={grid[8]}/></div>
+        </div>
+        <div class="box">
+            <div class="box-content"><Cell cell={grid[9]}/></div>
+        </div>
+        <div class="box">
+            <div class="box-content"><Cell cell={grid[10]}/></div>
+        </div>
+        <div class="box">
+            <div class="box-content"><Cell cell={grid[11]}/></div>
         </div>
     </div>
 </div>
@@ -168,7 +174,7 @@
         padding-top: calc(9/16 * 100%);
     }
 
-    .box .inner {
+    .box .box-content {
         position: absolute;
         left: 0;
         right: 0;
