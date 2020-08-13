@@ -4,12 +4,19 @@
     import * as Utils from './utils.js';
 
     const ASSETS = "http://localhost:7000";
-    const getAllLogos = ASSETS + "/get-logos";
+    const getAllLogos = ASSETS + "/mylogos";
 
     let cell;
     let grid = [];
     let allLogos = [];
     let count = 0;
+    let timer;
+
+    export function handleEdit() {
+        clearTimeout(timer);
+        alert("Timer stopped");
+    }
+
 
     onMount(async () => {
         fetch(getAllLogos)
@@ -20,9 +27,8 @@
                 grid = allLogos.slice(0, 12);
                 console.log("allLogos: ", allLogos);
                 console.log("grid: ", grid);
-
                 // debugger;
-                setTimeout(new3, 6000);
+                timer = setTimeout(new3, 6000);
             });
     });
 
@@ -30,29 +36,35 @@
     {
         let newCell;
         count++;
-        /*
         let slotsToReplace = Utils.getRandomSample(grid, 3);
         console.log("slotsToReplace: ", slotsToReplace);
         let slotIds = slotsToReplace.map(value => value.id);
+        console.log("About to replace " + slotIds.length + " slots");
+        console.log(" The Slots: ", slotIds);
+
         for (let i = 0; i < 12; i++) {
             if (slotIds.indexOf(grid[i].id) > -1) {
                 newCell = newRandomCell(allLogos, slotsToReplace);
-                console.log("Replacing " + grid[i] + " with new: " + newCell);
-
-                // cell = newCell;
+                console.log(
+                    i + " Replacing ",  grid[i], " with new: ", newCell
+                );
 
                 grid[i] = newCell;
             }
         }
-        */
 
+        /*
         let newId = Utils.randomInteger(0, allLogos.length - 1);
         let newSlot = Utils.randomInteger(0, 11);
-        grid[newSlot] = allLogos[newId];
-        grid = grid;
+        grid[newSlot] = {...allLogos[newId]};
+
+        grid = JSON.parse(JSON.stringify(grid));
+         */
 
         if (count < 12) {
-            setTimeout(new3, 6000, grid);
+            clearTimeout(timer);
+            console.log("Cycle #", count);  // debug
+            timer = setTimeout(new3, 6000, grid);
         } else {
             console.log("Timed changes done.");
         }
@@ -78,71 +90,44 @@
 <div class="grid">
     <div class="row">
         <div class="box">
-            <div class="inner">1
-                <Cell cell={grid[0]}/>
-            </div>
+            <div class="inner"><Cell cell={grid[0]}/></div>
         </div>
         <div class="box">
-            <div class="inner">2
-                <Cell cell={grid[1]}/>
-            </div>
+            <div class="inner"><Cell cell={grid[1]}/></div>
         </div>
         <div class="box">
-            <div class="inner">3
-                <Cell cell={grid[2]}/>
-            </div>
+            <div class="inner"><Cell cell={grid[2]}/></div>
         </div>
         <div class="box">
-            <div class="inner">4
-                <Cell cell={grid[3]}/>
-            </div>
+            <div class="inner"><Cell cell={grid[3]}/></div>
         </div>
     </div>
     <div class="row">
         <div class="box">
-            <div class="inner">5
-                <Cell cell={grid[4]}/>
-            </div>
+            <div class="inner"><Cell cell={grid[4]}/></div>
         </div>
         <div class="box">
-            <div class="inner">6
-                <Cell cell={grid[5]}/>
-            </div>
+            <div class="inner"><Cell cell={grid[5]}/></div>
         </div>
         <div class="box">
-            <div class="inner">7
-                <Cell cell={grid[6]}/>
-            </div>
+            <div class="inner"><Cell cell={grid[6]}/></div>
         </div>
         <div class="box">
-            <div class="inner">8
-                <Cell cell={grid[7]}/>
-            </div>
+            <div class="inner"><Cell cell={grid[7]}/></div>
         </div>
     </div>
     <div class="row">
         <div class="box">
-            <div class="inner">9
-                <Cell cell={grid[8]}/>
-            </div>
+            <div class="inner"><Cell cell={grid[8]}/></div>
         </div>
         <div class="box">
-            <div class="inner">1
-                <Cell cell={grid[9]}/>
-                0
-            </div>
+            <div class="inner"><Cell cell={grid[9]}/></div>
         </div>
         <div class="box">
-            <div class="inner">1
-                <Cell cell={grid[10]}/>
-                1
-            </div>
+            <div class="inner"><Cell cell={grid[10]}/></div>
         </div>
         <div class="box">
-            <div class="inner">1
-                <Cell cell={grid[11]}/>
-                2
-            </div>
+            <div class="inner"><Cell cell={grid[11]}/></div>
         </div>
     </div>
 </div>
@@ -151,14 +136,10 @@
     .grid {
         margin: 0 auto;
         width: 80vw;
-        max-width: 60vh;
+        max-width: 75vh;
         height: 80vw;
-        max-height: 45vh;
-        font-size: 2rem;
-
-        padding-top: 1vh;
-        padding-left: 4vw;
-        padding-right: 4vw;
+        max-height: 38vh;
+        padding: 1rem;
     }
 
     .row {
@@ -166,12 +147,7 @@
     }
 
     .box {
-        border: 1px solid blue;
-
-        background: white;
         margin: 1rem;
-        color: tomato;
-        font-weight: bold;
         flex: 1 0 auto;
         position: relative;
     }
@@ -180,7 +156,7 @@
         content: "";
         float: left;
         display: block;
-        padding-top: 100%;
+        padding-top: calc(9/16 * 100%);
     }
 
     .box .inner {

@@ -1,15 +1,17 @@
 <script>
+    import Identity from "./SvelteKey.svelte";
     import {onMount, beforeUpdate, afterUpdate, onDestroy} from "svelte";
-    import {send, receive} from "./crossfade.js";
+    import {quintOut} from 'svelte/easing';
+    import {crossfade, fade, scale} from 'svelte/transition';
 
-    export let cell = {id:0, path: "", cycle: 0};
+    export let cell = {id: 0, path: "", cycle: 0};
 
     onMount(() => {
         console.log("Cell mounted");
     });
 
     beforeUpdate(() => {
-    //    console.log(`Cell update id: ${cell.id}, path: ${cell.path}`);
+        //    console.log(`Cell update id: ${cell.id}, path: ${cell.path}`);
     });
 
     onDestroy(() => {
@@ -17,14 +19,17 @@
     });
 </script>
 
-<div class="cell"
-     id={`cell-slot-${cell.id}`}
-     in:send={{key:cell.id}}
-     out:receive={{key:cell.id}}
->
-    <span class="badge">{cell.id}</span>
-    <img src="http://localhost:7000/{cell.path}" alt="{cell.path}">
-</div>
+<Identity key="{cell.id}">
+
+    <div class="cell"
+         in:fade="{{duration: 3000, easing: quintOut}}"
+         out:fade="{{duration: 3000, easing: quintOut}}"
+    >
+        <span class="badge">{cell.id}</span>
+        <img src="http://localhost:7000/{cell.path}" alt="{cell.path}">
+    </div>
+
+</Identity>
 
 <style>
     .cell, img {
@@ -36,16 +41,8 @@
         overflow: hidden;
     }
 
-    .Xcell {
-        display: flex;
-        align-items: stretch;
-        justify-content: flex-end;
-        flex-direction: column;
-        will-change: transform;
-    }
-
     img {
-        object-fit: cover;
+        object-fit: contain;
         cursor: pointer;
     }
 </style>

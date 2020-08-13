@@ -1,20 +1,26 @@
 <script>
     import Grid from "./Charlie.svelte";
+
+    let grid;
+    export function tellGrid() {
+        grid.handleEdit();
+    }
 </script>
 
 <div class="container">
-    <div class="XXXframe">
+    <div class="frame">
         <h2>&nbsp; myLOGO</h2>
         <div class="outer">
             <div>
                 <h3 class="form-control-static pull-left">myGallery</h3>
-                <button class="btn btn-default pull-right">
+                <button class="btn btn-default pull-right"
+                        on:click="{tellGrid}">
                     Edit Gallery
                 </button>
             </div>
 
             <div class="inner">
-                <Grid/>
+                <Grid bind:this={grid}/>
             </div>
 
         </div>
@@ -26,7 +32,7 @@
         position: absolute;
         display: flex;
         align-items: center;
-        justify-content: center;
+        Xjustify-content: center;
         width: 100%;
         height: 100%;
         top: 0;
@@ -34,9 +40,7 @@
     }
 
     .frame {
-        position: relative;
-        display: flex;
-        flex-direction: column;
+        width: 100%;
     }
 
     .outer {
@@ -50,6 +54,5 @@
 
     .inner {
         background-color: white;
-
     }
 </style>
