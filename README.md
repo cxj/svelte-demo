@@ -1,10 +1,24 @@
-*Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+# Svelte / Radar ADR demonstration app
+
+This is a prototype of a logo gallery, which allows viewing a rotating
+selection of logo images, and the ability to edit the gallery via
+removal of selected images and the upload/addition of new images.
+
+It's written as an experiment in creating an HTML/CSS/Javascript client side
+using Svelte and a PHP server side using Radar ADR.
 
 ---
 
-# svelte app
+## PHP app
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
+This project uses [Radar](https://github.com/radarphp/Radar.Project) as
+the server-side framework.
+
+--
+
+## svelte app
+
+This project uses a template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
 
 To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
 
@@ -16,7 +30,7 @@ cd svelte-app
 *Note that you will need to have [Node.js](https://nodejs.org) installed.*
 
 
-## Get started
+### Get started
 
 Install the dependencies...
 
@@ -36,7 +50,7 @@ Navigate to [localhost:5000](http://localhost:5000). You should see your app run
 By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
 
 
-## Building and running in production mode
+### Building and running in production mode
 
 To create an optimised version of the app:
 
@@ -47,7 +61,7 @@ npm run build
 You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
 
 
-## Single-page app mode
+### Single-page app mode
 
 By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
 
@@ -57,7 +71,7 @@ If you're building a single-page app (SPA) with multiple routes, sirv needs to b
 "start": "sirv public --single"
 ```
 
-## Using TypeScript
+### Using TypeScript
 
 This template comes with a script to set up a TypeScript development environment, you can run it immediately after cloning the template with:
 
@@ -71,9 +85,9 @@ Or remove the script via:
 rm scripts/setupTypeScript.js
 ```
 
-## Deploying to the web
+### Deploying to the web
 
-### With [Vercel](https://vercel.com)
+#### With [Vercel](https://vercel.com)
 
 Install `vercel` if you haven't already:
 
@@ -88,7 +102,7 @@ cd public
 vercel deploy --name my-project
 ```
 
-### With [surge](https://surge.sh/)
+#### With [surge](https://surge.sh/)
 
 Install `surge` if you haven't already:
 
