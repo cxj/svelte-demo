@@ -1,10 +1,15 @@
 <script>
+    import Upload from "./Upload.svelte";
     import Identity from "./SvelteKey.svelte";
     import {onMount, beforeUpdate, afterUpdate, onDestroy} from "svelte";
     import {quintOut} from 'svelte/easing';
     import {crossfade, fade, scale} from 'svelte/transition';
 
     export let cell = {id: 0, path: "", cycle: 0, mode: "view"};
+
+    let files;
+
+    const DELETE = "/mylogos/";
 
     onMount(() => {
         console.log("Cell mounted");
@@ -17,28 +22,52 @@
     onDestroy(() => {
         console.log(" *** Cell destroyed ***");
     });
+
+    function remove(e)
+    {
+        let id = e.target.attributes.href.value;
+        console.log("id: ", id);
+        fetch(DELETE + id, {
+            method: 'DELETE',
+        })
+            .then(res => res.text())
+            .then(res => console.log(res));
+
+        // Change delete logo image to "empty" placeholder.
+        cell.mode = 'empty';
+    }
 </script>
 
 <Identity key="{cell.id}">
-
-    <div class="cell"
-         in:fade="{{duration: 3000, easing: quintOut}}"
-         out:fade="{{duration: 3000, easing: quintOut}}"
+    <div id="cell-{cell.id}" class="cell"
+         in:fade="{{delay: 500, duration: 3000}}"
+         out:fade="{{delay: 0, duration: 3000}}"
     >
-        <!-- span class="badge">{cell.id}</span -->
-        <span class="badge {cell.mode !== 'edit' ? 'hidden' : ''}">X</span>
+        <div class="{cell.mode !== 'edit' ? 'hidden' : ''}">
+            <button class="badge" href="{cell.id}" on:click={remove}>
+                X
+            </button>
+        </div>
 
         {#if cell.mode === 'add'}
-            <button type="button" class="add" on:click>+</button>
+        <span class="add">
+            <Upload/>
+        </span>
+        {:else if cell.mode === 'empty'}
+        <span class="empty"></span>
         {:else}
-            <img src="http://localhost:7000/{cell.path}" alt="{cell.path}">
+        <img src="/{cell.path}" alt="{cell.path}">
         {/if}
     </div>
-
 </Identity>
 
 <style>
-    button.add {
+    .add {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         color: white;
         font-weight: bold;
         font-size: 3vh;
@@ -47,11 +76,15 @@
         object-fit: contain;
     }
 
-    span.badge {
+    .badge {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 999;
         background-color: red;
     }
 
-    .cell, img, button {
+    .cell, img {
         position: absolute;
         top: 0;
         left: 0;
@@ -62,6 +95,5 @@
 
     img {
         object-fit: contain;
-        cursor: pointer;
     }
 </style>

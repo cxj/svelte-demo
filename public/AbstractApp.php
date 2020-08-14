@@ -15,10 +15,12 @@ use Exception;
 abstract class AbstractApp
 {
     protected LogoList $logoList;
+    protected Payload $payload;
 
     public function __construct()
     {
         $this->logoList = new LogoList();
+        $this->payload  = new Payload();
     }
 
     public function __invoke(array $input): Payload
@@ -46,10 +48,14 @@ abstract class AbstractApp
 
     protected function success($output): Payload
     {
-        $payload = new Payload();
+        return $this->payload->setStatus(PayloadStatus::SUCCESS)
+                             ->setOutput($output);
+    }
 
-        return $payload->setStatus(PayloadStatus::SUCCESS)
-                       ->setOutput($output);
+    protected function failure($output): Payload
+    {
+        return $this->payload->setStatus(PayloadStatus::FAILURE)
+                             ->setOutput($output);
     }
 
     abstract protected function exec(array $input): Payload;

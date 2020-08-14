@@ -4,7 +4,7 @@
     let grid;
     let mode = 'view';
 
-    export function tellGrid()
+    export function tellGrid(e)
     {
         if (mode === 'view') {
             grid.handleEdit();

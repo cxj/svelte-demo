@@ -58,6 +58,8 @@ $adr->get('root', '/', function (array $input) {
 $adr->get('get-logos', '/mylogos', AllLogos::class);
 // Create (save) a new logo, uploads image file and creates meta data for it.
 $adr->post('save-logo', '/mylogos', CreateLogo::class);
+// Delete a logo.  Client needs to refresh own data.
+$adr->delete('delete', '/mylogos/{id}', DeleteLogo::class);
 
 /*
  * Run

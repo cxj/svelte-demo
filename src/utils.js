@@ -62,19 +62,17 @@ export function randomInteger(min, max)
 }
 
 /**
+ * I hate fucking promises.
  * Fetch JSON data.
  * @param url
- * @returns {[]}
+ * @returns {Promise<void>}
  */
 export function getJsonData(url)
 {
-    let fuckingPromises = [];
-
-    fetch(url)
-        .then(r => r.json())
-        .then(data => {
-            fuckingPromises = data;
-        });
-
-    return fuckingPromises;
+    const request = async () => {
+        const response = await fetch(url);
+        const json = await response.json();
+        console.log(json);
+    }
+    return request();
 }

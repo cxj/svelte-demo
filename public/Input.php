@@ -14,7 +14,6 @@ class Input
 {
     /**
      * @param ServerRequestInterface $request
-     *
      * @return array
      */
     public function __invoke(ServerRequestInterface $request)
@@ -24,6 +23,7 @@ class Input
                 (array)$request->getQueryParams(),
                 (array)$request->getAttributes(),
                 (array)$request->getParsedBody(),
+                (array)$request->getUploadedFiles(),
                 $this->getDecodedJsonBody($request)
             )
         ];
@@ -38,7 +38,6 @@ class Input
      * has everything! ...except non-MIME body data.  Sigh.
      *
      * @param $request ServerRequestInterface
-     *
      * @return array
      */
     protected function getDecodedJsonBody($request): array
