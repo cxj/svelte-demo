@@ -34,7 +34,7 @@
             </div>
 
             <div class="inner">
-                <Grid bind:this={grid}/>
+                <Grid bind:this={grid}></Grid>
             </div>
 
         </div>
@@ -46,7 +46,6 @@
         position: absolute;
         display: flex;
         align-items: center;
-        Xjustify-content: center;
         width: 100%;
         height: 100%;
         top: 0;
