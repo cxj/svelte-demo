@@ -1,7 +1,7 @@
 {
     "name": "cxj/svelte-logo-app",
-    "description": "Demonstration App",
     "type": "project",
+    "description": "Demonstration App",
     "license": "proprietary",
     "authors": [
         {
@@ -9,16 +9,27 @@
             "email": "cxjohnson@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=7.4",
+        "laminas/laminas-diactoros": "~2.2",
         "radar/adr": "~2",
-        "relay/middleware": "~1.0",
-        "laminas/laminas-diactoros": "~2.2"
+        "relay/middleware": "~1.0"
+    },
+    "require-dev": {
+        "dantleech/what-changed": "^0.1.0@dev",
+        "ergebnis/composer-normalize": "^2.6",
+        "phpstan/phpstan": "^0.12.0@dev",
+        "phpstan/phpstan-phpunit": "^0.12.0@dev",
+        "phpunit/phpunit": "^9.4@dev",
+        "roave/security-advisories": "dev-master"
     },
     "autoload": {
         "psr-4": {
-            "Cxj\\": ["src/", "public/"]
+            "Cxj\\": [
+                "src/",
+                "public/"
+            ]
         }
-    }
+    },
+    "minimum-stability": "dev"
 }
