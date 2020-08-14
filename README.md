@@ -14,7 +14,7 @@ using Svelte and a PHP server side using Radar ADR.
 This project uses [Radar](https://github.com/radarphp/Radar.Project) as
 the server-side framework.
 
---
+---
 
 ## svelte app
 
