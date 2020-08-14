@@ -3,7 +3,7 @@
     import Cell from "./Cell.svelte";
     import * as Utils from './utils.js';
 
-    const MAX_CYCLES = 10;  // short for testing, very large for actual use.
+    const MAX_CYCLES = 100;  // short for testing, very large for actual use.
     const ASSETS = ""; // http://localhost:7000";
     const getAllLogos = ASSETS + "/mylogos";
 
