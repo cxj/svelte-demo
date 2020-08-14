@@ -12,6 +12,7 @@ use Aura\Payload\Payload;
 
 class DeleteLogo extends AbstractApp
 {
+    const ARCHIVE_DIR = "archive" . DIRECTORY_SEPARATOR;
 
     protected function exec(array $input): Payload
     {
@@ -25,13 +26,25 @@ class DeleteLogo extends AbstractApp
         foreach ($list as $key => $logo) {
             if ($logo->id === $id) {
                 error_log(__CLASS__ . " deleting $id");
-                if (false === rename($logo->path, "archive/$id")) {
+                if ($this->archiveFile($logo->path)) {
+                    return $this->success([]);
+                }
+                else {
                     $this->failure(['msg' => 'rename failed']);
-                };
-                break;
+                }
             }
         }
+        $this->failure(['msg' => 'rename failed']);
+    }
 
-        return $this->success([]);
+    protected function archiveFile(string $file): bool
+    {
+        if (!is_dir(self::ARCHIVE_DIR)) {
+            mkdir(self::ARCHIVE_DIR);
+        }
+
+        error_log("Renaming $file to " . self::ARCHIVE_DIR . basename($file));
+        
+        return rename($file, self::ARCHIVE_DIR . basename($file));
     }
 }
