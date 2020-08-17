@@ -21,7 +21,8 @@
         "phpstan/phpstan": "^0.12.0@dev",
         "phpstan/phpstan-phpunit": "^0.12.0@dev",
         "phpunit/phpunit": "^9.4@dev",
-        "roave/security-advisories": "dev-master"
+        "roave/security-advisories": "dev-master",
+        "php-mock/php-mock-phpunit": "dev-master"
     },
     "autoload": {
         "psr-4": {
