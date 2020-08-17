@@ -2,7 +2,7 @@
     "name": "cxj/svelte-logo-app",
     "type": "project",
     "description": "Demonstration App",
-    "license": "proprietary",
+    "license": "AGPL-3.0-only",
     "authors": [
         {
             "name": "Chris Johnson",

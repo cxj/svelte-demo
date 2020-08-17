@@ -44,7 +44,7 @@ class DeleteLogo extends AbstractApp
         }
 
         error_log("Renaming $file to " . self::ARCHIVE_DIR . basename($file));
-        
+
         return rename($file, self::ARCHIVE_DIR . basename($file));
     }
 }
