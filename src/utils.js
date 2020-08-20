@@ -1,8 +1,8 @@
 /**
  * Return a random sample without replacement from a population.
- * @param populationSize
- * @param sampleSize
  * @returns {[]}
+ * @param {number} populationSize
+ * @param {number} sampleSize
  */
 export function sampleWithoutReplacement(populationSize, sampleSize)
 {
@@ -25,9 +25,9 @@ export function sampleWithoutReplacement(populationSize, sampleSize)
 
 /**
  * Return a random size sample of input array.
- * @param array
- * @param size
  * @returns {*}
+ * @param {[]} array
+ * @param {*} size
  */
 export function getRandomSample(array, size)
 {

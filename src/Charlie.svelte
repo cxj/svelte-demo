@@ -113,6 +113,10 @@
         }
     }
 
+    /**
+     * @param {[]} list
+     * @param {*} avoid
+     */
     function newRandomCell(list, avoid)
     {
         let cell = {id: null, path: null};
