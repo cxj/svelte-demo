@@ -6,9 +6,6 @@
     function upload(formData, action)
     {
         console.log("upload called");
-        // const formData = new FormData();
-        // formData.append('damName', value);
-        // formData.append('dataFile', files[0]);
         fetch(action, {
             method: 'POST',
             body:   formData
@@ -67,19 +64,7 @@
     </button>
 
 </form>
-<!--
-{#if dataFile && files[0]}
-    <p>
-        {files[0].name}
-    </p>
-{/if}
 
-{#if value}
-    <button on:click={upload}>Submit</button>
-{:else}
-    <button on:click={upload} disabled>Submit</button>
-{/if}
--->
 <style>
     .add {
         position: absolute;

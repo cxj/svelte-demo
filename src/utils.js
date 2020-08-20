@@ -62,7 +62,6 @@ export function randomInteger(min, max)
 }
 
 /**
- * I hate fucking promises.
  * Fetch JSON data.
  * @param url
  * @returns {Promise<void>}
